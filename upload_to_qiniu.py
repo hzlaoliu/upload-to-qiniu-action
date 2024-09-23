@@ -4,12 +4,14 @@ from qiniu import Auth, put_file, etag
 import qiniu.config
 
 def upload_file_to_qiniu(access_key, secret_key, bucket_name, key, local_file, is_dir):
-    if is_dir:
+    if is_dir == True:
       # 找出所有的文件，如果是文件则上传，
       for root, dirs, files in os.walk(local_file):
         for file in files:
-          upload_single_file(access_key, secret_key, bucket_name, key, os.path.join(root, file))
-
+          real_file = os.path.join(root, file)
+          # real_file 去掉 local_file 前缀
+          real_key = key+ real_file.replace(local_file, '')
+          upload_single_file(access_key, secret_key, bucket_name, real_key, real_file)
     else:
         upload_single_file(access_key, secret_key, bucket_name, key, local_file)
     
