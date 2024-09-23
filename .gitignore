@@ -1,0 +1,4 @@
+test.py
+dist/
+.qiniu_pythonsdk_hostscache.json
+.vscode/
