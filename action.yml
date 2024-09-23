@@ -13,7 +13,7 @@ inputs:
   key:
     description: 'Key of the file'
     required: true
-  localfile:
+  local_file:
     description: 'Path of the local file'
     required: true
   is_dir:
