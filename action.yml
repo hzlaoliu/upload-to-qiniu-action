@@ -16,6 +16,9 @@ inputs:
   localfile:
     description: 'Path of the local file'
     required: true
+  is_dir:
+    description: 'Is the file a directory'
+    required: false
 runs:
   using: 'composite'
   steps:
@@ -27,5 +30,5 @@ runs:
 
     - name: Run script
       run: |
-        python ${{ github.action_path }}/upload_to_qiniu.py --access_key ${{ inputs.access_key }} --secret_key ${{ inputs.secret_key }} --bucket_name ${{ inputs.bucket_name }} --key ${{ inputs.key }} --local_file ${{ inputs.local_file }}
+        python ${{ github.action_path }}/upload_to_qiniu.py --access_key ${{ inputs.access_key }} --secret_key ${{ inputs.secret_key }} --bucket_name ${{ inputs.bucket_name }} --key ${{ inputs.key }} --local_file ${{ inputs.local_file }} --is_dir ${{ inputs.is_dir }}
       shell: bash
