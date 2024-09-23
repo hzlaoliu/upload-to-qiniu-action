@@ -17,13 +17,13 @@ def upload_file_to_qiniu(access_key, secret_key, bucket_name, key, local_file, i
     
 
 # 上传单文件
-def upload_single_file(access_key, secret_key, bucket_name, key, local_file):
+def upload_single_file(access_key, secret_key, bucket_name, real_key, real_file):
 
     q = Auth(access_key, secret_key)
-    token = q.upload_token(bucket_name, key+local_file, 3600)
-    ret, info = put_file(token, key+local_file, local_file, version='v2')
-    assert ret['key'] == key+local_file
-    assert ret['hash'] == etag(local_file)
+    token = q.upload_token(bucket_name, real_key, 3600)
+    ret, info = put_file(token, real_key, real_file, version='v2')
+    assert ret['key'] == real_key
+    assert ret['hash'] == etag(real_file)
 
 
 
