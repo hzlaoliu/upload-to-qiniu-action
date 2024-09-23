@@ -19,9 +19,9 @@ def upload_single_file(access_key, secret_key, bucket_name, key, local_file):
 
     q = Auth(access_key, secret_key)
     token = q.upload_token(bucket_name, key, 3600)
-    ret, info = put_file(token, key, local_file, version='v2')
+    ret, info = put_file(token, key+local_file, local_file, version='v2')
     print(info)
-    assert ret['key'] == key
+    assert ret['key'] == key+local_file
     assert ret['hash'] == etag(local_file)
 
 
