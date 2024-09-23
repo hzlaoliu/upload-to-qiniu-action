@@ -3,8 +3,9 @@ import os
 from qiniu import Auth, put_file, etag
 import qiniu.config
 
-def upload_file_to_qiniu(access_key, secret_key, bucket_name, key, local_file, is_dir):
-    if is_dir == True:
+def upload_file_to_qiniu(access_key, secret_key, bucket_name, key, local_file):
+    # local_file 如果是文件夹
+    if os.path.isdir(local_file):
       # 找出所有的文件，如果是文件则上传，
       for root, dirs, files in os.walk(local_file):
         for file in files:
@@ -44,4 +45,4 @@ if __name__ == "__main__":
     parser.add_argument('--is_dir', required=False, help='Is the file a directory')
 
     args = parser.parse_args()
-    upload_file_to_qiniu(args.access_key, args.secret_key, args.bucket_name, args.key, args.local_file, args.is_dir)
+    upload_file_to_qiniu(args.access_key, args.secret_key, args.bucket_name, args.key, args.local_file)
